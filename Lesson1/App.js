@@ -1,21 +1,20 @@
 const express = require ('express');
 const app = express();
-
+const userRouter = require ("./routes/usersRoute.js")
 
 //use methods via http
 
-app.get("/",(req,res)=>{
-    res.send("I am a get request from Home Route");
-})
-app.post("/",(req,res)=>{
-    res.send("I am a post request at Route");
-})
-app.put("/",(req,res)=>{
-    res.send("I am a put request at Route");
-})
 
-app.delete("/",(req,res)=>{
-    res.send("I am a delete request at Route");
+app.use("/api/user",userRouter);
+
+app.use("/",(req,res)=>{
+    res.send("I am a get request from Home Route");
+    res.end();
+});
+
+app.use((req,res)=>{
+    res.send("404 !!! Not a valid URL");
 })
+ 
 
 module.exports = app;
